@@ -37,7 +37,7 @@
 					<div class="input-wrap">
 						<div class="form-box d-flex justify-content-between">
 							<input type="text" class="form-control" style="font-size:1.5rem;height:calc(3rem + 10px)" v-model="search">
-							<button class="btn search-btn" v-on:click="onSearchClick">Search</button>
+							<button class="btn search-btn" v-on:click="onSearchClickButton">Search</button>
 						</div>
 					</div>
 
@@ -54,7 +54,7 @@
 										<th>Updated Date</th>
 									</tr>
 									</thead>
-								<template v-if="!no_data">
+								<template v-if="!no_data && !apiRateExceeded">
 									<tbody v-for="(item,key) in items">
 										<tr v-on:click="onclick(item.html_url)">
 											<td data-title="No">{{ ++key }}</td>
@@ -66,10 +66,17 @@
 										</tr>
 									</tbody>
 								</template>
-								<template v-else-if="no_data">
+								<template v-else-if="no_data && !apiRateExceeded">
 									<tbody>
 										<tr>
 											<td colspan="6" style="text-align:center" data-title="norecord">No Record Found.</td>
+										</tr>
+									</tbody>
+								</template>
+								<template v-else-if="apiRateExceeded">
+									<tbody>
+										<tr>
+											<td colspan="6" style="text-align:center" data-title="apirateexceeded">API Rate Exceeded,Please Try Later</td>
 										</tr>
 									</tbody>
 								</template>
@@ -81,7 +88,7 @@
 								v-model="page"
 								:total-rows="rows"
 								:per-page="per_page"
-								@input="onSearchClick"
+								@input="onSearchClickPage"
 								first-text="First"
 								prev-text="Prev"
 								next-text="Next"
