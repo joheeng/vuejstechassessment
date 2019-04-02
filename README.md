@@ -1,2 +1,2 @@
-# vuejstechassignment
-A repository for technical assignment
+# vuejstechassessment
+A repository for technical assessment
