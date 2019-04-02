@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+	<script src="js/vue.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/bootstrap-vue.js"></script>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Tech Assessment</title>
+
+	<!--Google Font============================================= -->
+	<link href="css/montserrat.css" rel="stylesheet">
+	<link href="css/roboto.css" rel="stylesheet">
+
+	<!--CSS============================================= -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/table.css">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+  	<link type="text/css" rel="stylesheet" href="css/bootstrap-vue.css"/>
+</head>
+
+<body>
+
+	<!-- Start Banner Area -->
+	<section class="home-banner-area relative">
+		<div id="vueapp" class="container">
+			<div class="row fullscreen d-flex justify-content-center">
+				<div class="banner-content col-lg-12 col-md-12">
+					<h1>GitHub Repository Search</h1>
+					<p class="text-white">
+						The search bar below will search throughout GitHub Repository.
+					</p>
+
+					<div class="input-wrap">
+						<div class="form-box d-flex justify-content-between">
+							<input type="text" class="form-control" style="font-size:1.5rem;height:calc(3rem + 10px)" v-model="search">
+							<button class="btn search-btn" v-on:click="onSearchClick">Search</button>
+						</div>
+					</div>
+
+					<template v-if="queried">
+						<div class="input-wrap table-responsive-vertical shadow-z-1">
+							<table id="table" class="table table-hover table-mc-light-blue">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Full Name</th>
+										<th>Description</th>
+										<th>Language</th>
+										<th>Total Stars</th>
+										<th>Updated Date</th>
+									</tr>
+									</thead>
+								<template v-if="!no_data">
+									<tbody v-for="(item,key) in items">
+										<tr v-on:click="onclick(item.html_url)">
+											<td data-title="No">{{ ++key }}</td>
+											<td data-title="Full Name">{{ item.full_name }}</td>
+											<td data-title="Description">{{ item.description }}</td>
+											<td data-title="Language">{{ item.language }}</td>
+											<td data-title="Total Stars">{{ item.stargazers_count }}</td>
+											<td data-title="Updated Date">{{ item.updated_at | formatDate }}</td>
+										</tr>
+									</tbody>
+								</template>
+								<template v-else-if="no_data">
+									<tbody>
+										<tr>
+											<td colspan="6" style="text-align:center" data-title="norecord">No Record Found.</td>
+										</tr>
+									</tbody>
+								</template>
+							</table>
+						</div>
+						<template v-if="!no_data">
+							<div class="overflow-auto">
+								<b-pagination
+								v-model="page"
+								:total-rows="rows"
+								:per-page="per_page"
+								@input="onSearchClick"
+								first-text="First"
+								prev-text="Prev"
+								next-text="Next"
+								last-text="Last"
+								></b-pagination>
+							</div>
+						</template>
+					</template>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "vuejstechassessment",
+  "version": "1.0.0",
+  "description": "Tech Assessment",
+  "main": "index.js",
+  "dependencies": {
+    "karma-jasmine": "^2.0.1",
+    "karma-chrome-launcher": "^2.2.0"
+  },
+  "devDependencies": {
+    "karma": "^4.0.1",
+    "mocha": "^6.0.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Eric Ng Jo Hee",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joheeng/vuejstechassessment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joheeng/vuejstechassessment/issues"
+  },
+  "homepage": "https://github.com/joheeng/vuejstechassessment#readme"
+}
